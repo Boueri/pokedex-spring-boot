@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.boueri.pokedex.controller.PokedexController"
+      alignment="CENTER"
+      spacing="15">
+
+    <Label text="Minha Pokédex Profissional"/>
+
+    <TextField fx:id="pokemonInput"
+               promptText="Digite o nome do Pokémon"/>
+
+    <Button fx:id="searchButton"
+            text="Buscar"/>
+
+    <Label fx:id="pokemonName"/>
+
+    <Label fx:id="pokemonInfo"/>
+
+</VBox>
