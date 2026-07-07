@@ -3,11 +3,11 @@ package com.boueri.pokedex.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TypeInfo {
+public class EvolutionChainUrl {
 
-    private String name;
+    private String url;
 
-    public String getName() {
-        return name;
+    public String getUrl() {
+        return url;
     }
 }

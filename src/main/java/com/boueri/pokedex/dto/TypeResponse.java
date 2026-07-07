@@ -1,9 +1,13 @@
 package com.boueri.pokedex.dto;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TypeResponse {
-    private Integer slot;
+
     private TypeInfo type;
+
+    public TypeInfo getType() {
+        return type;
+    }
 }

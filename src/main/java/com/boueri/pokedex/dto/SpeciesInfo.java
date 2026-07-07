@@ -3,7 +3,7 @@ package com.boueri.pokedex.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TypeInfo {
+public class SpeciesInfo {
 
     private String name;
 

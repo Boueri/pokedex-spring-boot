@@ -1,8 +1,13 @@
 package com.boueri.pokedex.dto;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AbilityInfo {
+
     private String name;
+
+    public String getName() {
+        return name;
+    }
 }

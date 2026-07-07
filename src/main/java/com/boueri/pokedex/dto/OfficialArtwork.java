@@ -4,18 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SpritesResponse {
+public class OfficialArtwork {
 
     @JsonProperty("front_default")
     private String frontDefault;
 
-    private OtherSprites other;
-
     public String getFrontDefault() {
         return frontDefault;
-    }
-
-    public OtherSprites getOther() {
-        return other;
     }
 }
