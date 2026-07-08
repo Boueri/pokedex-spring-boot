@@ -18,10 +18,11 @@ public class JavaFxApplication extends Application {
     }
 
     @Override
-    public void init() {
-        // Inicializa o contexto do Spring Boot
-        context = new SpringApplicationBuilder(PokedexApplication.class).run();
-    }
+public void init() {
+    context = new SpringApplicationBuilder(PokedexApplication.class)
+            .web(org.springframework.boot.WebApplicationType.NONE)
+            .run();
+}
 
     @Override
     public void start(Stage primaryStage) throws Exception {

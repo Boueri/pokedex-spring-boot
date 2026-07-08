@@ -8,26 +8,34 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.boueri.pokedex.controller.PokedexController"
+      stylesheets="@../css/style.css"
+      styleClass="root"
       alignment="TOP_CENTER"
-      spacing="18"
-      style="-fx-background-color:#E53935;">
+      spacing="18">
 
     <padding>
         <Insets top="25" right="30" bottom="25" left="30"/>
     </padding>
 
-    <Label text="POKÉDEX"
-           style="-fx-font-size:40px; -fx-font-weight:bold; -fx-text-fill:white;"/>
+    <VBox alignment="CENTER" spacing="8">
+    <HBox alignment="CENTER" spacing="12">
+        <Label text="●" style="-fx-text-fill:#29B6F6; -fx-font-size:42px;"/>
+        <Label text="●" style="-fx-text-fill:#FFEB3B; -fx-font-size:22px;"/>
+        <Label text="●" style="-fx-text-fill:#66BB6A; -fx-font-size:22px;"/>
+    </HBox>
+
+    <Label text="POKÉDEX" styleClass="title"/>
+</VBox>
 
     <HBox alignment="CENTER" spacing="10">
         <TextField fx:id="searchField"
                    prefWidth="360"
                    promptText="Digite o nome ou ID do Pokémon"
-                   style="-fx-padding:9; -fx-background-radius:12;"/>
+                   styleClass="search-field"/>
 
         <Button text="Buscar"
                 onAction="#buscarPokemon"
-                style="-fx-padding:9 20; -fx-background-radius:12;"/>
+                styleClass="action-button"/>
     </HBox>
 
     <ScrollPane fitToWidth="true"
@@ -37,7 +45,7 @@
         <VBox spacing="22"
               alignment="TOP_CENTER"
               maxWidth="1250"
-              style="-fx-background-color:#F7F7F7; -fx-background-radius:28; -fx-padding:28;">
+              styleClass="main-container">
 
             <!-- TOPO -->
             <HBox spacing="30" alignment="CENTER">
@@ -46,12 +54,12 @@
                 <VBox alignment="CENTER"
                       spacing="14"
                       prefWidth="520"
-                      style="-fx-background-color:white; -fx-background-radius:26; -fx-padding:25;">
+                      styleClass="card">
 
                     <Label fx:id="nameLabel"
                            text="Busque um Pokémon"
                            wrapText="true"
-                           style="-fx-font-size:32px; -fx-font-weight:bold; -fx-text-fill:#111;"/>
+                           styleClass="main-name"/>
 
                     <ImageView fx:id="pokemonImage"
                                fitWidth="360"
@@ -60,82 +68,92 @@
 
                     <Label fx:id="typeLabel"
                            wrapText="true"
-                           style="-fx-font-size:14px; -fx-font-weight:bold; -fx-text-fill:#222;"/>
+                           styleClass="text"/>
 
                     <HBox spacing="10" alignment="CENTER">
-
                         <Button text="Normal"
                                 onAction="#mostrarNormal"
-                                style="-fx-padding:8 18; -fx-background-radius:12;"/>
+                                styleClass="action-button"/>
 
                         <Button text="⭐ Shiny"
                                 onAction="#mostrarShiny"
-                                style="-fx-padding:8 18; -fx-background-radius:12;"/>
-
+                                styleClass="action-button"/>
                     </HBox>
 
                     <Button text="🔊 Ouvir Cry"
                             onAction="#tocarCry"
-                            style="-fx-padding:8 18; -fx-background-radius:12;"/>
+                            styleClass="action-button"/>
 
                 </VBox>
 
                 <!-- CARD ESPÉCIE -->
                 <VBox spacing="14"
                       prefWidth="520"
-                      style="-fx-background-color:white; -fx-background-radius:26; -fx-padding:25;">
+                      styleClass="card">
 
                     <Label text="Dados da Espécie"
-                           style="-fx-font-size:26px; -fx-font-weight:bold; -fx-text-fill:#222;"/>
+                           styleClass="card-title"/>
 
                     <Separator/>
 
-                    <Label fx:id="speciesLabel" wrapText="true" style="-fx-font-size:16px; -fx-text-fill:#222;"/>
-                    <Label fx:id="generationLabel" wrapText="true" style="-fx-font-size:16px; -fx-text-fill:#222;"/>
-                    <Label fx:id="habitatLabel" wrapText="true" style="-fx-font-size:16px; -fx-text-fill:#222;"/>
-                    <Label fx:id="legendaryLabel" wrapText="true" style="-fx-font-size:16px; -fx-text-fill:#222;"/>
-                    <Label fx:id="mythicalLabel" wrapText="true" style="-fx-font-size:16px; -fx-text-fill:#222;"/>
-                    <Label fx:id="babyLabel" wrapText="true" style="-fx-font-size:16px; -fx-text-fill:#222;"/>
-
-                </VBox>
+                    <Label fx:id="speciesLabel" wrapText="true" styleClass="text"/>
+                    <Label fx:id="generationLabel" wrapText="true" styleClass="text"/>
+                    <Label fx:id="habitatLabel" wrapText="true" styleClass="text"/>
+                    <Label fx:id="legendaryLabel" wrapText="true" styleClass="text"/>
+                    <Label fx:id="mythicalLabel" wrapText="true" styleClass="text"/>
+                    <Label fx:id="babyLabel" wrapText="true" styleClass="text"/>
+                                    </VBox>
 
             </HBox>
 
-            <!-- INFORMAÇÕES -->
+            <!-- INFORMAÇÕES + ESTATÍSTICAS -->
+
             <HBox spacing="30">
+
+                <!-- CARD INFORMAÇÕES -->
 
                 <VBox spacing="14"
                       prefWidth="520"
-                      style="-fx-background-color:white; -fx-background-radius:26; -fx-padding:25;">
+                      styleClass="card">
 
                     <Label text="Informações"
-                           style="-fx-font-size:26px; -fx-font-weight:bold; -fx-text-fill:#222;"/>
+                           styleClass="card-title"/>
 
                     <Separator/>
 
-                    <Label fx:id="idLabel" wrapText="true" style="-fx-font-size:16px; -fx-text-fill:#222;"/>
-                    <Label fx:id="heightLabel" wrapText="true" style="-fx-font-size:16px; -fx-text-fill:#222;"/>
-                    <Label fx:id="weightLabel" wrapText="true" style="-fx-font-size:16px; -fx-text-fill:#222;"/>
+                    <Label fx:id="idLabel"
+                           wrapText="true"
+                           styleClass="text"/>
+
+                    <Label fx:id="heightLabel"
+                           wrapText="true"
+                           styleClass="text"/>
+
+                    <Label fx:id="weightLabel"
+                           wrapText="true"
+                           styleClass="text"/>
 
                     <Separator/>
 
                     <Label text="Habilidades"
-                           style="-fx-font-size:20px; -fx-font-weight:bold; -fx-text-fill:#222;"/>
+                           style="-fx-font-size:20px; -fx-font-weight:bold;"
+                           styleClass="text"/>
 
                     <Label fx:id="abilitiesLabel"
                            wrapText="true"
                            maxWidth="470"
-                           style="-fx-font-size:16px; -fx-text-fill:#222;"/>
+                           styleClass="text"/>
 
                 </VBox>
 
-                <!-- ESTATÍSTICAS -->
+                <!-- CARD ESTATÍSTICAS -->
+
                 <VBox spacing="14"
                       prefWidth="520"
-                      style="-fx-background-color:white; -fx-background-radius:26; -fx-padding:25;">
+                      styleClass="card">
 
                     <Label text="Estatísticas"
-                           style="-fx-font-size:26px; -fx-font-weight:bold; -fx-text-fill:#222;"/>
+                           styleClass="card-title"/>
 
                     <Separator/>
 
@@ -147,12 +165,13 @@
             </HBox>
 
             <!-- EVOLUÇÕES -->
+
             <VBox spacing="16"
                   alignment="CENTER"
-                  style="-fx-background-color:white; -fx-background-radius:26; -fx-padding:25;">
+                  styleClass="card">
 
                 <Label text="Linha Evolutiva"
-                       style="-fx-font-size:26px; -fx-font-weight:bold; -fx-text-fill:#222;"/>
+                       styleClass="card-title"/>
 
                 <FlowPane fx:id="evolutionBox"
                           hgap="16"
@@ -163,18 +182,46 @@
             </VBox>
 
             <!-- DESCRIÇÃO -->
+
             <VBox spacing="14"
-                  style="-fx-background-color:white; -fx-background-radius:26; -fx-padding:25;">
+                  styleClass="card">
 
                 <Label text="Descrição Oficial"
-                       style="-fx-font-size:26px; -fx-font-weight:bold; -fx-text-fill:#222;"/>
+                       styleClass="card-title"/>
 
                 <Separator/>
 
                 <Label fx:id="descriptionLabel"
                        wrapText="true"
                        maxWidth="1050"
-                       style="-fx-font-size:16px; -fx-text-fill:#222;"/>
+                       styleClass="text"/>
+
+            </VBox>
+
+            <!-- COMPARADOR -->
+
+            <VBox spacing="14"
+                  styleClass="card">
+
+                <Label text="Comparador"
+                       styleClass="card-title"/>
+
+                <HBox spacing="10"
+                      alignment="CENTER">
+
+                    <TextField fx:id="compareField"
+                               prefWidth="260"
+                               promptText="Digite outro Pokémon"
+                               styleClass="search-field"/>
+
+                    <Button text="Comparar"
+                            onAction="#compararPokemon"
+                            styleClass="action-button"/>
+
+                </HBox>
+
+                <VBox fx:id="compareBox"
+                      spacing="10"/>
 
             </VBox>
 

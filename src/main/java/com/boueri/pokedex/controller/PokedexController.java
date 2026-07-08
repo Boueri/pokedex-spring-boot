@@ -24,6 +24,8 @@ import javafx.scene.shape.Rectangle;
 import org.springframework.stereotype.Controller;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.Node;
+
 
 @Controller
 public class PokedexController {
@@ -45,6 +47,8 @@ public class PokedexController {
     @FXML private FlowPane evolutionBox;
     @FXML private VBox statsBox;
     @FXML private Label descriptionLabel;
+    @FXML private TextField compareField;
+    @FXML private VBox compareBox;
 
     private final PokemonClient pokemonClient;
     private PokemonResponse pokemonAtual;
@@ -531,5 +535,180 @@ public void tocarCry() {
     Media media = new Media(cryUrl);
     MediaPlayer player = new MediaPlayer(media);
     player.play();
+}
+@FXML
+public void compararPokemon() {
+
+    compareBox.getChildren().clear();
+
+    if (pokemonAtual == null) {
+        compareBox.getChildren().add(criarTextoComparador("Pesquise um Pokémon primeiro."));
+        return;
+    }
+
+    String nome = compareField.getText().trim().toLowerCase();
+
+    if (nome.isBlank()) {
+        compareBox.getChildren().add(criarTextoComparador("Digite outro Pokémon para comparar."));
+        return;
+    }
+
+    PokemonResponse rival = pokemonClient.getPokemon(nome);
+
+    if (rival == null) {
+        compareBox.getChildren().add(criarTextoComparador("Pokémon não encontrado."));
+        return;
+    }
+
+    HBox topo = new HBox(40);
+    topo.setAlignment(Pos.CENTER);
+
+    VBox cardAtual = criarCardComparacao(pokemonAtual);
+    VBox cardRival = criarCardComparacao(rival);
+
+    Label versus = new Label("VS");
+    versus.setStyle("-fx-font-size:28px; -fx-font-weight:bold; -fx-text-fill:#E53935;");
+
+    topo.getChildren().addAll(cardAtual, versus, cardRival);
+    compareBox.getChildren().add(topo);
+
+    int pontosAtual = 0;
+    int pontosRival = 0;
+
+    for (int i = 0; i < pokemonAtual.getStats().size(); i++) {
+
+        StatResponse s1 = pokemonAtual.getStats().get(i);
+        StatResponse s2 = rival.getStats().get(i);
+
+        int valor1 = s1.getBase_stat();
+        int valor2 = s2.getBase_stat();
+
+        if (valor1 > valor2) pontosAtual++;
+        if (valor2 > valor1) pontosRival++;
+
+        compareBox.getChildren().add(
+                criarLinhaComparacao(
+                        traduzirStat(s1.getStat().getName()),
+                        valor1,
+                        valor2
+                )
+        );
+    }
+
+    Label resultado = new Label();
+
+    if (pontosAtual > pontosRival) {
+        resultado.setText("🏆 Vencedor Geral: " + pokemonAtual.getName().toUpperCase());
+    } else if (pontosRival > pontosAtual) {
+        resultado.setText("🏆 Vencedor Geral: " + rival.getName().toUpperCase());
+    } else {
+        resultado.setText("🤝 Empate Geral");
+    }
+
+    resultado.setStyle("-fx-font-size:22px; -fx-font-weight:bold; -fx-text-fill:#222;");
+    compareBox.getChildren().add(resultado);
+    }
+
+    private Label criarTextoComparador(String texto) {
+    Label label = new Label(texto);
+    label.setStyle("-fx-font-size:16px; -fx-text-fill:#222;");
+    return label;
+}
+
+private VBox criarCardComparacao(PokemonResponse pokemon) {
+
+    VBox card = new VBox(8);
+    card.setAlignment(Pos.CENTER);
+    card.setStyle(
+            "-fx-background-color:#F7F7F7;" +
+            "-fx-background-radius:18;" +
+            "-fx-padding:16;"
+    );
+
+    ImageView imagem = new ImageView();
+    imagem.setFitWidth(130);
+    imagem.setFitHeight(130);
+    imagem.setPreserveRatio(true);
+
+    String imageUrl = pegarUrlImagem(pokemon);
+
+    if (imageUrl != null) {
+        imagem.setImage(new Image(imageUrl));
+    }
+
+    Label nome = new Label(pokemon.getName().toUpperCase());
+    nome.setStyle("-fx-font-size:18px; -fx-font-weight:bold; -fx-text-fill:#222;");
+
+    Label tipo = new Label(montarTipos(pokemon));
+    tipo.setStyle("-fx-font-size:14px; -fx-text-fill:#555;");
+
+    card.getChildren().addAll(imagem, nome, tipo);
+
+    return card;
+}
+
+private HBox criarLinhaComparacao(String nomeStat, int valor1, int valor2) {
+
+    Label stat = new Label(nomeStat);
+    stat.setMinWidth(110);
+    stat.setStyle("-fx-font-size:14px; -fx-font-weight:bold; -fx-text-fill:#222;");
+
+    Label numero1 = new Label(String.valueOf(valor1));
+    numero1.setMinWidth(35);
+    numero1.setStyle("-fx-font-size:14px; -fx-font-weight:bold; -fx-text-fill:" +
+            (valor1 >= valor2 ? "#2E7D32" : "#777") + ";");
+
+    StackPane barra1 = criarBarraComparacao(valor1);
+
+    Label numero2 = new Label(String.valueOf(valor2));
+    numero2.setMinWidth(35);
+    numero2.setStyle("-fx-font-size:14px; -fx-font-weight:bold; -fx-text-fill:" +
+            (valor2 >= valor1 ? "#2E7D32" : "#777") + ";");
+
+    StackPane barra2 = criarBarraComparacao(valor2);
+
+    HBox linha = new HBox(10);
+    linha.setAlignment(Pos.CENTER_LEFT);
+    linha.getChildren().addAll(numero1, barra1, stat, barra2, numero2);
+
+    return linha;
+}
+
+private StackPane criarBarraComparacao(int valor) {
+
+    Rectangle fundo = new Rectangle(180, 12);
+    fundo.setArcWidth(12);
+    fundo.setArcHeight(12);
+    fundo.setStyle("-fx-fill:#E0E0E0;");
+
+    Rectangle barra = new Rectangle(Math.min(valor, 150) / 150.0 * 180, 12);
+    barra.setArcWidth(12);
+    barra.setArcHeight(12);
+    barra.setStyle("-fx-fill:" + corStat(valor) + ";");
+
+    StackPane box = new StackPane();
+    box.setAlignment(Pos.CENTER_LEFT);
+    box.getChildren().addAll(fundo, barra);
+
+    return box;
+}
+
+private String pegarUrlImagem(PokemonResponse pokemon) {
+
+    if (pokemon == null || pokemon.getSprites() == null) {
+        return null;
+    }
+
+    if (pokemon.getSprites().getOther() != null
+            && pokemon.getSprites().getOther().getOfficialArtwork() != null
+            && pokemon.getSprites().getOther().getOfficialArtwork().getFrontDefault() != null) {
+
+        return pokemon.getSprites()
+                .getOther()
+                .getOfficialArtwork()
+                .getFrontDefault();
+    }
+
+    return pokemon.getSprites().getFrontDefault();
 }
 }
