@@ -1,94 +1,159 @@
-# 🔴 Pokédex Spring Boot
+# 📖 Pokédex Profissional
 
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-orange)
+Uma Pokédex moderna desenvolvida em **Java 21**, **Spring Boot** e **JavaFX**, consumindo dados em tempo real da **PokéAPI**.
 
-## 📌 Sobre o Projeto
-
-Esta é uma Pokédex desenvolvida com **Java + Spring Boot**, criada com o objetivo de praticar e demonstrar conceitos de desenvolvimento backend, consumo de APIs externas, organização de código e boas práticas de arquitetura.
-
-O projeto utiliza a **PokéAPI** para buscar informações dos Pokémon e apresentar os dados de forma estruturada através de uma API REST.
-
-🚧 **Projeto em desenvolvimento**  
-Novas funcionalidades, melhorias de código e aprimoramentos visuais serão adicionados continuamente.
+O projeto foi desenvolvido com foco em arquitetura limpa, organização de código, interface moderna e integração com APIs REST, simulando uma aplicação desktop de nível profissional.
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+# ✨ Funcionalidades
 
-- ☕ Java
+## 🔍 Pesquisa
+- Busca por nome do Pokémon
+- Busca por ID
+- Consumo de dados em tempo real da PokéAPI
+
+## 🖼️ Visualização
+- Artwork oficial em alta resolução
+- Alternância entre sprite Normal e ⭐ Shiny
+- Interface inspirada na Pokédex de Pokémon Scarlet & Violet
+
+## 📚 Informações
+
+Cada Pokémon exibe:
+
+- 📖 Espécie
+- 🎮 Geração
+- 🌍 Habitat
+- ⭐ Lendário
+- ✨ Mítico
+- 👶 Pokémon Bebê
+- 📘 Descrição oficial da Pokédex
+
+## 📊 Estatísticas
+
+- HP
+- Ataque
+- Defesa
+- Ataque Especial
+- Defesa Especial
+- Velocidade
+
+As estatísticas são exibidas em barras coloridas com seus respectivos valores.
+
+## 🔄 Linha Evolutiva
+
+- Evoluções carregadas automaticamente
+- Cards clicáveis
+- Artwork oficial de cada evolução
+
+## 🔊 Áudio
+
+- Reprodução do Cry oficial de cada Pokémon
+
+---
+
+# 🛠 Tecnologias Utilizadas
+
+- ☕ Java 21
 - 🌱 Spring Boot
-- 📡 Spring Web
-- 🔗 Integração com API REST externa (PokéAPI)
+- 🎨 JavaFX
 - 📦 Maven
-- 🧩 Arquitetura em camadas (Controller, Service, DTO)
-- 🐙 Git e GitHub
+- 🌐 REST Client
+- 🔗 PokéAPI
+- 🎯 FXML
+- 🎨 CSS (JavaFX)
 
 ---
 
-## ⚙️ Funcionalidades Atuais
+# 📂 Estrutura do Projeto
 
-✅ Consulta de Pokémon por nome  
-✅ Integração com PokéAPI  
-✅ Conversão de dados externos utilizando DTO  
-✅ Estrutura organizada seguindo boas práticas  
-✅ API REST funcionando com Spring Boot  
-
----
-
-## 🔮 Próximas Implementações
-
-🚧 Interface Front-end responsiva  
-🚧 Sistema de busca avançada  
-🚧 Favoritar Pokémon  
-🚧 Banco de dados para salvar informações  
-🚧 Autenticação de usuários com JWT  
-🚧 Dashboard com estatísticas dos Pokémon  
-🚧 Melhorias na documentação da API com Swagger  
-
----
-
-## 📂 Estrutura do Projeto
+```
 src
-
-└── main
-
-└── java
-
-└── com.pokedex
-
+├── client
 ├── controller
-
-├── service
-
 ├── dto
-
-└── model
-
+├── config
+├── resources
+│   ├── fxml
+│   ├── css
+│   └── images
+```
 
 ---
 
-## ▶️ Como Executar o Projeto
+# 🚀 Como executar
 
 Clone o repositório:
 
-bash
+```bash
 git clone https://github.com/Boueri/pokedex-spring-boot.git
+```
 
 Entre na pasta:
-```
+
+```bash
 cd pokedex-spring-boot
 ```
+
 Execute:
-```
-./mvnw spring-boot:run
-```
-ou no Windows:
-```
-mvnw.cmd spring-boot:run
+
+```bash
+./mvnw javafx:run
 ```
 
-👨‍💻 Desenvolvido por
+---
 
-Boueri
+# 📸 Interface
 
-Projeto criado para evolução profissional em desenvolvimento Java Backend e construção de portfólio.
+A aplicação apresenta uma interface moderna inspirada nos jogos da franquia Pokémon, com:
+
+- Cards organizados
+- Barra de estatísticas
+- Linha evolutiva
+- Informações completas
+- Artwork oficial
+- Modo Shiny
+- Reprodução do Cry
+
+---
+
+# 🎯 Roadmap
+
+## Próximas funcionalidades
+
+- ❤️ Sistema de Favoritos
+- 🌙 Tema Escuro
+- 📊 Comparador de Pokémon
+- 🔍 Pesquisa Inteligente
+- 🎵 Música de fundo
+- 💾 Persistência em banco de dados
+- 📈 Histórico de pesquisas
+- 🏆 Ranking por estatísticas
+- 🎮 Animações da interface
+
+---
+
+# 📚 API Utilizada
+
+- PokéAPI
+
+https://pokeapi.co/
+
+---
+
+# 👨‍💻 Autor
+
+**João Gabriel Boueri Santos**
+
+GitHub:
+
+https://github.com/Boueri
+
+LinkedIn:
+
+https://www.linkedin.com/in/joao-gabriel-boueri
+
+---
+
+## ⭐ Se este projeto foi útil para você, considere deixar uma estrela no repositório!
